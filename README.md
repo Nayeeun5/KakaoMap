@@ -1,12 +1,47 @@
-# React + Vite
+# 프로젝트 기여 상세 요약
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+본 문서는 제가 팀원으로서 기여한 파일과 구현 기능, 그리고 그 효과를 정리한 것입니다.
 
-Currently, two official plugins are available:
+## 기여 파일 및 구현 내용
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **components/KakaoMap.jsx**  
+  - 카카오 지도 초기화 및 기본 레벨 설정  
+  - 집/도착지 마커 표시 및 마커 교체 시 정리 로직 구현  
+  - 마우스 호버 시 라벨 표시, 집 마커는 라벨 제외 처리  
+  - `setBounds` 보완으로 카메라 튐 현상 해결  
+  → 안정적인 지도 UI 제공 및 사용자 혼란 감소  
 
-## Expanding the ESLint configuration
+- **pages/MainPage2.jsx**  
+  - 길찾기 패널 열림/닫힘 상태 관리  
+  - 출발지/도착지 전환 기능 구현  
+  - URL 쿼리스트링 동기화 → 새로고침/공유 시 동일 상태 복원  
+  → 상태 일관성 확보 및 사용자 편의성 향상  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **components/place/PlaceCarousel.jsx**  
+  - 추천 장소 캐러셀 UI 제작  
+  - 각 장소에 대해 "지도 열기/길찾기" 액션 연결  
+  - 키보드 접근성(탭 순서/포커스) 고려  
+  → 추천 결과와 지도 액션 간 자연스러운 연결  
+
+- **lib/utils.js**  
+  - 문자열 정규화 함수 작성 (공백/괄호 제거 등)  
+  - 의도 감지(`detectIntent`), 쿼리 파라미터 유틸 구현  
+  - 입력 안정화(디바운스 처리 등)  
+  → 검색 정확도와 의도 파악률 개선  
+
+- **services/directions.js**  
+  - `/geo/car/directions` API 호출 래퍼 작성  
+  - 응답 파싱/표준화, 에러 핸들링 강화  
+  - 요청 시간 로깅으로 성능 분석 가능  
+  → API 호출 신뢰성 향상 및 디버깅 용이  
+
+- **store/chat.js**  
+  - 채팅 상태 관리(Zustand) 구조 구현  
+  - 메시지 추가/저장/불러오기 로직 작성  
+  - 대화 흐름 보존 기능 제공  
+  → AI 채팅 경험의 연속성 강화  
+
+- **hooks/useStoreHydrated.js**  
+  - Zustand 스토어 하이드레이션 여부 체크 훅 구현  
+  - 하이드레이션 완료 이후에만 상태 반영  
+  → 초기 잘못된 값 렌더링 문제 방지
